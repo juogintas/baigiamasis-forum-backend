@@ -13,9 +13,17 @@ const SIGN_UP = async (req, res) => {
     password: hash,
   });
 
+  const token = jwt.sign(
+    { username: user.username.id, _id: user._id },
+    process.env.JWT_SECRET,
+    { expiresIn: "2h" }
+  );
+
   const response = await user.save();
 
-  return res.status(201).json({ message: "User was created", user: response });
+  return res
+    .status(201)
+    .json({ message: "User was created", user: response, jwt: token });
 };
 
 const LOG_IN = async (req, res) => {
