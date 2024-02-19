@@ -45,7 +45,7 @@ const LOG_IN = async (req, res) => {
     { expiresIn: "2h" }
   );
 
-  return res.status(200).json({ jwt: token });
+  return res.status(200).json({ jwt: token, user_id: user._id });
 };
 
 export { SIGN_UP, LOG_IN };
